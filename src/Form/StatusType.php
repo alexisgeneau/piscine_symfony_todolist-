@@ -18,7 +18,7 @@ class StatusType extends AbstractType
                 'label_attr' => ['class' => 'form-label'],
                 'label' => 'Titre'
             ])
-            ->add('Enregistrer', SubmitType::class, [
+            ->add(child: 'Enregistrer', type: SubmitType::class, options: [
                 'attr' => ['class' => 'btn btn-success mt-3']
             ])
         ;
