@@ -17,15 +17,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="">Task manager</a>
+            <a class="navbar-brand" href="{{ path('home') }}">Task manager</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{{ path('home') }}">Accueil</a>#}
-{#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('tag') }}">Tags</a>
                     </li>
@@ -35,16 +35,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('priority') }}">Priorités</a>
                     </li>
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{{ path('list_categories') }}">Catégories</a>#}
-{#                    </li>#}
                 </ul>
 
                 <!-- Search Form -->
-{#                <form class="d-flex" method="get" action="{{ path('search_results') }}">#}
-{#                    <input class="form-control me-2" type="search" name="search" placeholder="Rechercher..." aria-label="Rechercher" value="{{ app.request.query.get('search') }}">#}
-{#                    <button class="btn btn-outline-light" type="submit">Rechercher</button>#}
-{#                </form>#}
+                <form class="d-flex" method="get" action="">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Rechercher..." aria-label="Rechercher" value="{{ app.request.query.get('search') }}">
+                    <button class="btn btn-outline-light" type="submit">Rechercher</button>
+                </form>
             </div>
         </div>
     </nav>
