@@ -22,6 +22,16 @@ Cette application permet de gérer des projets et leurs tâches associées. Elle
 - **Lister les tags** : Voir tous les tags.
 - **Supprimer un tags** : Supprimer un tag.
 
+### Statuts
+- **Statut des tâches** :
+  - Les statuts possibles sont stockés dans une table `status` (ex. : "À faire", "En cours", "Terminée").
+  - Une tâche peut changer de statut manuellement ou automatiquement selon les règles métier (validation des tâches parentes et sous-tâches).
+
+### Priority
+- **priorité des tâches** :
+  - Les priorités possibles sont stockés dans une table `priorities`.
+  - Une tâche peut changer de priorité manuellement ou automatiquement selon les règles métier.
+
 
 ### Projets
 - **Créer un projet** : Ajouter un nouveau projet.
@@ -40,14 +50,6 @@ Cette application permet de gérer des projets et leurs tâches associées. Elle
 - **Modifier une tâche** : Modifier le titre, la description ou le statut d’une tâche.
 - **Supprimer une tâche** : Supprimer une tâche, ce qui supprime également ses sous-tâches.
 
-### Statuts
-- **Statut des tâches** :
-    - Les statuts possibles sont stockés dans une table `status` (ex. : "À faire", "En cours", "Terminée").
-    - Une tâche peut changer de statut manuellement ou automatiquement selon les règles métier (validation des tâches parentes et sous-tâches).
-
-### Tags
-- **Associer des tags aux projets** : Un projet peut avoir plusieurs tags.
-- **Lister les projets par tags** : Afficher les projets associés à un tag spécifique.
 
 ---
 
