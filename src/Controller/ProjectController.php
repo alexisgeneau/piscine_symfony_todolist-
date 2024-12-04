@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Form\ProjectType;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProjectController extends AbstractController
 {
     #[Route('/project', name: 'project')]
-    public function index(): Response
+    public function index(ProjectRepository $projectRepository): Response
     {
+        $projects = $projectRepository->findAll();
+
         return $this->render('project/index.html.twig', [
-            'controller_name' => 'ProjectController',
+            'projects' => $projects
         ]);
     }
 
