@@ -31,6 +31,9 @@ class Project
     #[ORM\JoinTable(name: 'project_tag')]
     private Collection $tags;
 
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Task::class)]
+    private Collection $tasks;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,5 +97,10 @@ class Project
         $this->tags = $tags;
 
         return $this;
+    }
+
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
     }
 }

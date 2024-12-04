@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Édition du projet - {{ project.name }}{% endblock %}
+
+{% block body %}
+    <section class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3>Édition du projet : {{ project.name }}</h3>
+            <a href="{{ path('project') }}" class="btn btn-secondary">Retour à la liste des projets</a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="post" action="{{ path('project_update', { id: project.id }) }}">
+                    {{ form_start(project_form, {'attr': {'class': 'needs-validation'}}) }}
+
+                    {{ form_widget(project_form, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_end(project_form) }}
+                </form>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs my-4" id="relationTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tags-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button" role="tab" aria-controls="tags" aria-selected="true">
+                    Tags
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab" aria-controls="tasks" aria-selected="false">
+                    Tâches
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="relationTabsContent">
+            <!-- Onglet Tags -->
+            <div class="tab-pane fade show active" id="tags" role="tabpanel" aria-labelledby="tags-tab">
+                {% if project.tags is not empty %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nom du Tag</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tag in project.tags %}
+                            <tr>
+                                <td>{{ tag.name }}</td>
+                                <td>
+{#                                    <a href="{{ path('tag_delete', { id: tag.id }) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tag ?');">Supprimer</a>#}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted mt-3">Aucun tag associé à ce projet.</p>
+                {% endif %}
+            </div>
+
+            <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <h5>Tâches associées</h5>
+                    <!-- Bouton pour afficher la modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+                        Ajouter une tâche
+                    </button>
+                </div>
+
+                {% if project.tasks is not empty %}
+                    <table class="table table-striped mt-3">
+                        <thead>
+                        <tr>
+                            <th>Nom de la Tâche</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for task in project.tasks %}
+                            <tr>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.status }}</td>
+                                <td>
+                                    <a href="{{ path('task_edit', { id: task.id }) }}" class="btn btn-sm btn-warning">Modifier</a>
+                                    <a href="{{ path('task_delete', { id: task.id }) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted mt-3">Aucune tâche associée à ce projet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- Modal Bootstrap pour ajouter une tâche -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTaskModalLabel">Ajouter une tâche</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ path('task_create', { id: project.id }) }}">
+                        {{ form_start(task_form, {'attr': {'class': 'needs-validation'}}) }}
+
+                        {{ form_widget(task_form, {'attr': {'class': 'form-control'}}) }}
+
+                        {{ form_end(task_form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
