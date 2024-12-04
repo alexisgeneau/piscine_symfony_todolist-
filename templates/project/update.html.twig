@@ -71,7 +71,7 @@
                 </div>
 
                 {% if project.tasks is not empty %}
-                    <table class="table table-striped mt-3">
+                    <table class="table mt-3">
                         <thead>
                         <tr>
                             <th>Nom de la Tâche</th>
@@ -82,11 +82,11 @@
                         <tbody>
                         {% for task in project.tasks %}
                             <tr>
-                                <td>{{ task.name }}</td>
-                                <td>{{ task.status }}</td>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.status.name }}</td>
                                 <td>
-                                    <a href="{{ path('task_edit', { id: task.id }) }}" class="btn btn-sm btn-warning">Modifier</a>
-                                    <a href="{{ path('task_delete', { id: task.id }) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');">Supprimer</a>
+{#                                    <a href="{{ path('task_edit', { id: task.id }) }}" class="btn btn-sm btn-warning">Modifier</a>#}
+{#                                    <a href="{{ path('task_delete', { id: task.id }) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');">Supprimer</a>#}
                                 </td>
                             </tr>
                         {% endfor %}

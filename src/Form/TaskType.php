@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Priority;
+use App\Entity\Status;
 use App\Entity\Task;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -24,6 +27,22 @@ class TaskType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label'],
                 'label' => 'Description'
+            ])
+            ->add('status', EntityType::class, [
+                'class' => Status::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez un statut',
+                'attr' => ['class' => 'form-select'],
+                'label' => 'Statut',
+                'label_attr' => ['class' => 'form-label'],
+            ])
+            ->add('priority', EntityType::class, [
+                'class' => Priority::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez une priorité',
+                'attr' => ['class' => 'form-select'],
+                'label' => 'Priorité',
+                'label_attr' => ['class' => 'form-label'],
             ])
             ->add('ajouter', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success mt-3']

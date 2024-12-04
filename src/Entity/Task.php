@@ -24,7 +24,14 @@ class Task
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'tasks')]
-    private ?Project $project;
+    #[ORM\JoinColumn(unique: false)]
+    private Project $project;
+
+    #[ORM\ManyToOne(targetEntity: Status::class)]
+    private Status $status;
+
+    #[ORM\ManyToOne(targetEntity: Priority::class)]
+    private Priority $priority;
 
     public function getId(): ?int
     {
@@ -63,6 +70,42 @@ class Task
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(Project $project): static
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPriority(): ?Priority
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(Priority $priority): static
+    {
+        $this->priority = $priority;
 
         return $this;
     }
