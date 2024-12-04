@@ -11,7 +11,9 @@
 
         <div class="row">
             {% for project in projects %}
+
                 <div class="col-md-6 col-lg-4 mb-4">
+                    <a href="{{ path('project_update', {id: project.id}) }}" class="text-decoration-none">
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
                             <h5 class="card-title">{{ project.name }}</h5>
@@ -24,6 +26,7 @@
                             {% endif %}
                         </div>
                     </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>

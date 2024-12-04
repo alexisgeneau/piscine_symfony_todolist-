@@ -107,13 +107,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ path('task_create', { id: project.id }) }}">
-                        {{ form_start(task_form, {'attr': {'class': 'needs-validation'}}) }}
+                        {{ form_start(task_form, {'attr': {'class': 'needs-validation', 'action': path('task_create', { id: project.id })}}) }}
 
                         {{ form_widget(task_form, {'attr': {'class': 'form-control'}}) }}
 
                         {{ form_end(task_form) }}
-                    </form>
                 </div>
             </div>
         </div>

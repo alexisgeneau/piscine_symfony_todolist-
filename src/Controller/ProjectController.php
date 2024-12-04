@@ -49,7 +49,7 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/project/{id}/update', name: 'project_update', requirements: ['id' => '\d+'])]
-    public function update(int $id, ProjectRepository $projectRepository, Request $request): Response
+    public function update(int $id, ProjectRepository $projectRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $project = $projectRepository->find($id);
 
@@ -62,7 +62,15 @@ class ProjectController extends AbstractController
         $task = new Task();
         $task_form = $this->createForm(TaskType::class, $task);
 
-        //
+        // mettre à jour le projet
+        $project_form->handleRequest($request);
+
+        if($project_form->isSubmitted()) {
+            $entityManager->persist($project);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('project_update', ['id' => $project->getId()]);
+        }
 
         return $this->render('project/update.html.twig', [
             'project' => $project,
